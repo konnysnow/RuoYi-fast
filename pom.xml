@@ -247,6 +247,27 @@
             <version>${poi.version}</version>
         </dependency>
 
+        <!--https://m.w3cschool.cn/article/95791286.html 教你用Java来实现把视频批量转换为gif动态图 -->
+        <!-- https://mvnrepository.com/artifact/ws.schild/jave-core -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-core</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <!-- 以下依赖根据系统二选一 -->
+        <!-- win系统平台的依赖 -->
+<!--        <dependency>-->
+<!--            <groupId>ws.schild</groupId>-->
+<!--            <artifactId>jave-nativebin-win64</artifactId>-->
+<!--            <version>3.1.1</version>-->
+<!--        </dependency>-->
+        <!-- linux系统平台的依赖 -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-nativebin-linux64</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
