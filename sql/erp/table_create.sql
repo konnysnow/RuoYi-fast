@@ -40,7 +40,7 @@ create table ry_fast.t_product
     supplier        varchar(255) default '' null comment '供应商',
     product_area        varchar(255) default '' null comment '产地',
     tag        varchar(255) default '' null comment '标签',
-    description        text default '' null comment '描述',
+    description        text  null comment '描述',
     stock_quantity        double default 0.0 null comment '库存数量',
     create_user bigint                  null comment '创建人',
     create_time datetime                null comment '创建时间',
