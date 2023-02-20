@@ -153,3 +153,51 @@ create table ry_fast.t_order_item
     comment '订单明细表';
 /*-----------------------2023-02-10，end----------------------------*/
 
+
+/*-----------------------2023-02-19，begin----------------------------*/
+create table ry_fast.t_homework
+(
+    id          bigint auto_increment comment 'id' primary key,
+    name        varchar(255) default '' null comment '作业名',
+    worker        varchar(255) default '' null comment '负责人',
+    auditor        varchar(255) default '' null comment '审核人',
+    class_name        varchar(255) default '' null comment '课程',/*语文，数学，英语，围棋，陶笛，阅读，体育*/
+    type        varchar(255) default '' null comment '类型',/*作业，日程*/
+    freq        varchar(255) default '' null comment '周期',/*每天，工作日，每周，周末，每月，每年，一次性，不定时*/
+
+    freq_str varchar(255) default '' null comment '周期时间',
+    plan_date datetime                null comment '计划时间',
+    plan_time        int default 0 null comment '计划用时',/*单位，秒*/
+    display_order        varchar(255) default '' null comment '顺序',
+    priority        varchar(255) default '' null comment '优先级',
+    alert        varchar(255) default '' null comment '提醒',
+    alert_date datetime                null comment '提醒时间',
+
+    create_user bigint                  null comment '创建人',
+    create_time datetime                null comment '创建时间',
+    update_user bigint                  null comment '更新人',
+    update_time datetime                null comment '更新时间',
+    remark      varchar(500)            null comment '备注'
+)
+    comment '作业表';
+create table ry_fast.t_homework_record
+(
+    id          bigint auto_increment comment 'id' primary key,
+    homework_id        bigint null comment '作业id',
+    worker        varchar(255) default '' null comment '负责人',
+    auditor        varchar(255) default '' null comment '审核人',
+    result        varchar(255) default '' null comment '结果',
+    key_content        varchar(255) default '' null comment '重点',
+    begin_date datetime                null comment '开始时间',
+    end_date datetime                null comment '完成时间',
+    use_time        int default 0 null comment '用时',/*单位，秒*/
+
+    create_user bigint                  null comment '创建人',
+    create_time datetime                null comment '创建时间',
+    update_user bigint                  null comment '更新人',
+    update_time datetime                null comment '更新时间',
+    remark      varchar(500)            null comment '备注'
+)
+    comment '作业计时表';
+/*-----------------------2023-02-19，end----------------------------*/
+
