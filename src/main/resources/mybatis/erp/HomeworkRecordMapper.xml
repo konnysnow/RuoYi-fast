@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.erp.homeworkrecord.mapper.HomeworkRecordMapper">
+    
+    <resultMap type="HomeworkRecord" id="HomeworkRecordResult">
+        <result property="id"    column="id"    />
+        <result property="homeworkId"    column="homework_id"    />
+        <result property="worker"    column="worker"    />
+        <result property="auditor"    column="auditor"    />
+        <result property="result"    column="result"    />
+        <result property="keyContent"    column="key_content"    />
+        <result property="beginDate"    column="begin_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="useTime"    column="use_time"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateUser"    column="update_user"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHomeworkRecordVo">
+        select id, homework_id, worker, auditor, result, key_content, begin_date, end_date, use_time, create_user, create_time, update_user, update_time, remark from t_homework_record
+    </sql>
+
+    <select id="selectHomeworkRecordList" parameterType="HomeworkRecord" resultMap="HomeworkRecordResult">
+        <include refid="selectHomeworkRecordVo"/>
+        <where>  
+            <if test="homeworkId != null "> and homework_id = #{homeworkId}</if>
+            <if test="worker != null  and worker != ''"> and worker = #{worker}</if>
+            <if test="auditor != null  and auditor != ''"> and auditor = #{auditor}</if>
+            <if test="result != null  and result != ''"> and result = #{result}</if>
+            <if test="keyContent != null  and keyContent != ''"> and key_content = #{keyContent}</if>
+            <if test="beginDate != null "> and begin_date = #{beginDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="useTime != null "> and use_time = #{useTime}</if>
+            <if test="createUser != null "> and create_user = #{createUser}</if>
+            <if test="updateUser != null "> and update_user = #{updateUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectHomeworkRecordById" parameterType="Long" resultMap="HomeworkRecordResult">
+        <include refid="selectHomeworkRecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHomeworkRecord" parameterType="HomeworkRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into t_homework_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="homeworkId != null">homework_id,</if>
+            <if test="worker != null">worker,</if>
+            <if test="auditor != null">auditor,</if>
+            <if test="result != null">result,</if>
+            <if test="keyContent != null">key_content,</if>
+            <if test="beginDate != null">begin_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="useTime != null">use_time,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateUser != null">update_user,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="homeworkId != null">#{homeworkId},</if>
+            <if test="worker != null">#{worker},</if>
+            <if test="auditor != null">#{auditor},</if>
+            <if test="result != null">#{result},</if>
+            <if test="keyContent != null">#{keyContent},</if>
+            <if test="beginDate != null">#{beginDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="useTime != null">#{useTime},</if>
+            <if test="createUser != null">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateUser != null">#{updateUser},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHomeworkRecord" parameterType="HomeworkRecord">
+        update t_homework_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="homeworkId != null">homework_id = #{homeworkId},</if>
+            <if test="worker != null">worker = #{worker},</if>
+            <if test="auditor != null">auditor = #{auditor},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="keyContent != null">key_content = #{keyContent},</if>
+            <if test="beginDate != null">begin_date = #{beginDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="useTime != null">use_time = #{useTime},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHomeworkRecordById" parameterType="Long">
+        delete from t_homework_record where id = #{id}
+    </delete>
+
+    <delete id="deleteHomeworkRecordByIds" parameterType="String">
+        delete from t_homework_record where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

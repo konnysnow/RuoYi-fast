@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('订单列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>订单编号：</label>
+                                <input type="text" name="code"/>
+                            </li>
+                            <li>
+                                <label>客户id：</label>
+                                <input type="text" name="customerId"/>
+                            </li>
+                            <li>
+                                <label>数量：</label>
+                                <input type="text" name="quantity"/>
+                            </li>
+                            <li>
+                                <label>金额：</label>
+                                <input type="text" name="money"/>
+                            </li>
+                            <li>
+                                <label>优惠金额：</label>
+                                <input type="text" name="discountsMoney"/>
+                            </li>
+                            <li>
+                                <label>下单时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择下单时间" name="orderTime"/>
+                            </li>
+                            <li>
+                                <label>客户指定配送时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择客户指定配送时间" name="targetTime"/>
+                            </li>
+                            <li>
+                                <label>商家预计配送时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择商家预计配送时间" name="planSendTime"/>
+                            </li>
+                            <li>
+                                <label>订单名称：</label>
+                                <input type="text" name="title"/>
+                            </li>
+                            <li>
+                                <label>付款金额：</label>
+                                <input type="text" name="payMoney"/>
+                            </li>
+                            <li>
+                                <label>付款时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择付款时间" name="payTime"/>
+                            </li>
+                            <li>
+                                <label>创建人：</label>
+                                <input type="text" name="sendUser"/>
+                            </li>
+                            <li>
+                                <label>配送时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择配送时间" name="sendTime"/>
+                            </li>
+                            <li>
+                                <label>省：</label>
+                                <input type="text" name="province"/>
+                            </li>
+                            <li>
+                                <label>市：</label>
+                                <input type="text" name="city"/>
+                            </li>
+                            <li>
+                                <label>区县：</label>
+                                <input type="text" name="district"/>
+                            </li>
+                            <li>
+                                <label>村：</label>
+                                <input type="text" name="village"/>
+                            </li>
+                            <li>
+                                <label>标签：</label>
+                                <input type="text" name="tag"/>
+                            </li>
+                            <li>
+                                <label>街道门牌：</label>
+                                <input type="text" name="address"/>
+                            </li>
+                            <li>
+                                <label>完整地址：</label>
+                                <input type="text" name="addressAll"/>
+                            </li>
+                            <li>
+                                <label>结单人：</label>
+                                <input type="text" name="endUser"/>
+                            </li>
+                            <li>
+                                <label>结单时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择结单时间" name="endTime"/>
+                            </li>
+                            <li>
+                                <label>创建人：</label>
+                                <input type="text" name="createUser"/>
+                            </li>
+                            <li>
+                                <label>更新人：</label>
+                                <input type="text" name="updateUser"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="erp:order:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="erp:order:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="erp:order:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="erp:order:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('erp:order:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('erp:order:remove')}]];
+        var prefix = ctx + "erp/order";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "订单",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id',
+                    title: 'id',
+                    visible: false
+                },
+                {
+                    field: 'code',
+                    title: '订单编号'
+                },
+                {
+                    field: 'customerId',
+                    title: '客户id'
+                },
+                {
+                    field: 'status',
+                    title: '订单状态'
+                },
+                {
+                    field: 'type',
+                    title: '类型'
+                },
+                {
+                    field: 'quantity',
+                    title: '数量'
+                },
+                {
+                    field: 'money',
+                    title: '金额'
+                },
+                {
+                    field: 'discountsMoney',
+                    title: '优惠金额'
+                },
+                {
+                    field: 'orderTime',
+                    title: '下单时间'
+                },
+                {
+                    field: 'targetTime',
+                    title: '客户指定配送时间'
+                },
+                {
+                    field: 'planSendTime',
+                    title: '商家预计配送时间'
+                },
+                {
+                    field: 'title',
+                    title: '订单名称'
+                },
+                {
+                    field: 'payStatus',
+                    title: '付款状态'
+                },
+                {
+                    field: 'payMoney',
+                    title: '付款金额'
+                },
+                {
+                    field: 'payTime',
+                    title: '付款时间'
+                },
+                {
+                    field: 'sendStatus',
+                    title: '配送状态'
+                },
+                {
+                    field: 'sendUser',
+                    title: '创建人'
+                },
+                {
+                    field: 'sendTime',
+                    title: '配送时间'
+                },
+                {
+                    field: 'province',
+                    title: '省'
+                },
+                {
+                    field: 'city',
+                    title: '市'
+                },
+                {
+                    field: 'district',
+                    title: '区县'
+                },
+                {
+                    field: 'village',
+                    title: '村'
+                },
+                {
+                    field: 'tag',
+                    title: '标签'
+                },
+                {
+                    field: 'address',
+                    title: '街道门牌'
+                },
+                {
+                    field: 'addressAll',
+                    title: '完整地址'
+                },
+                {
+                    field: 'endUser',
+                    title: '结单人'
+                },
+                {
+                    field: 'endTime',
+                    title: '结单时间'
+                },
+                {
+                    field: 'createUser',
+                    title: '创建人'
+                },
+                {
+                    field: 'updateUser',
+                    title: '更新人'
+                },
+                {
+                    field: 'remark',
+                    title: '备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.erp.customer.mapper.CustomerMapper">
+    
+    <resultMap type="Customer" id="CustomerResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="mobile2"    column="mobile2"    />
+        <result property="type"    column="type"    />
+        <result property="weixinName"    column="weixin_name"    />
+        <result property="miniOpenid"    column="mini_openid"    />
+        <result property="miniUnionid"    column="mini_unionid"    />
+        <result property="picMain"    column="pic_main"    />
+        <result property="picMainS"    column="pic_main_s"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="district"    column="district"    />
+        <result property="village"    column="village"    />
+        <result property="tag"    column="tag"    />
+        <result property="address"    column="address"    />
+        <result property="addressAll"    column="address_all"    />
+        <result property="carCode"    column="car_code"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateUser"    column="update_user"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCustomerVo">
+        select id, name, code, mobile, mobile2, type, weixin_name, mini_openid, mini_unionid, pic_main, pic_main_s, province, city, district, village, tag, address, address_all, car_code, create_user, create_time, update_user, update_time, remark from t_customer
+    </sql>
+
+    <select id="selectCustomerList" parameterType="Customer" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile like concat('%', #{mobile}, '%')</if>
+            <if test="mobile2 != null  and mobile2 != ''"> and mobile2 like concat('%', #{mobile2}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="weixinName != null  and weixinName != ''"> and weixin_name like concat('%', #{weixinName}, '%')</if>
+            <if test="miniOpenid != null  and miniOpenid != ''"> and mini_openid like concat('%', #{miniOpenid}, '%')</if>
+            <if test="miniUnionid != null  and miniUnionid != ''"> and mini_unionid like concat('%', #{miniUnionid}, '%')</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="district != null  and district != ''"> and district = #{district}</if>
+            <if test="village != null  and village != ''"> and village = #{village}</if>
+            <if test="tag != null  and tag != ''"> and tag = #{tag}</if>
+            <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%')</if>
+            <if test="addressAll != null  and addressAll != ''"> and address_all like concat('%', #{addressAll}, '%')</if>
+            <if test="carCode != null  and carCode != ''"> and car_code = #{carCode}</if>
+            <if test="createUser != null "> and create_user = #{createUser}</if>
+            <if test="updateUser != null "> and update_user = #{updateUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectCustomerById" parameterType="Long" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
+        insert into t_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="mobile2 != null">mobile2,</if>
+            <if test="type != null">type,</if>
+            <if test="weixinName != null">weixin_name,</if>
+            <if test="miniOpenid != null">mini_openid,</if>
+            <if test="miniUnionid != null">mini_unionid,</if>
+            <if test="picMain != null">pic_main,</if>
+            <if test="picMainS != null">pic_main_s,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="district != null">district,</if>
+            <if test="village != null">village,</if>
+            <if test="tag != null">tag,</if>
+            <if test="address != null">address,</if>
+            <if test="addressAll != null">address_all,</if>
+            <if test="carCode != null">car_code,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateUser != null">update_user,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="mobile2 != null">#{mobile2},</if>
+            <if test="type != null">#{type},</if>
+            <if test="weixinName != null">#{weixinName},</if>
+            <if test="miniOpenid != null">#{miniOpenid},</if>
+            <if test="miniUnionid != null">#{miniUnionid},</if>
+            <if test="picMain != null">#{picMain},</if>
+            <if test="picMainS != null">#{picMainS},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="district != null">#{district},</if>
+            <if test="village != null">#{village},</if>
+            <if test="tag != null">#{tag},</if>
+            <if test="address != null">#{address},</if>
+            <if test="addressAll != null">#{addressAll},</if>
+            <if test="carCode != null">#{carCode},</if>
+            <if test="createUser != null">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateUser != null">#{updateUser},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCustomer" parameterType="Customer">
+        update t_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="mobile2 != null">mobile2 = #{mobile2},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="weixinName != null">weixin_name = #{weixinName},</if>
+            <if test="miniOpenid != null">mini_openid = #{miniOpenid},</if>
+            <if test="miniUnionid != null">mini_unionid = #{miniUnionid},</if>
+            <if test="picMain != null">pic_main = #{picMain},</if>
+            <if test="picMainS != null">pic_main_s = #{picMainS},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="district != null">district = #{district},</if>
+            <if test="village != null">village = #{village},</if>
+            <if test="tag != null">tag = #{tag},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="addressAll != null">address_all = #{addressAll},</if>
+            <if test="carCode != null">car_code = #{carCode},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCustomerById" parameterType="Long">
+        delete from t_customer where id = #{id}
+    </delete>
+
+    <delete id="deleteCustomerByIds" parameterType="String">
+        delete from t_customer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

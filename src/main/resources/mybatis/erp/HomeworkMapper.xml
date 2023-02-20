@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.erp.homework.mapper.HomeworkMapper">
+    
+    <resultMap type="Homework" id="HomeworkResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="worker"    column="worker"    />
+        <result property="auditor"    column="auditor"    />
+        <result property="className"    column="class_name"    />
+        <result property="type"    column="type"    />
+        <result property="freq"    column="freq"    />
+        <result property="freqStr"    column="freq_str"    />
+        <result property="planDate"    column="plan_date"    />
+        <result property="planTime"    column="plan_time"    />
+        <result property="displayOrder"    column="display_order"    />
+        <result property="priority"    column="priority"    />
+        <result property="alert"    column="alert"    />
+        <result property="alertDate"    column="alert_date"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateUser"    column="update_user"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHomeworkVo">
+        select id, name, worker, auditor, class_name, type, freq, freq_str, plan_date, plan_time, display_order, priority, alert, alert_date, create_user, create_time, update_user, update_time, remark from t_homework
+    </sql>
+
+    <select id="selectHomeworkList" parameterType="Homework" resultMap="HomeworkResult">
+        <include refid="selectHomeworkVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="worker != null  and worker != ''"> and worker = #{worker}</if>
+            <if test="auditor != null  and auditor != ''"> and auditor = #{auditor}</if>
+            <if test="className != null  and className != ''"> and class_name like concat('%', #{className}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="freq != null  and freq != ''"> and freq = #{freq}</if>
+            <if test="freqStr != null  and freqStr != ''"> and freq_str = #{freqStr}</if>
+            <if test="planDate != null "> and plan_date = #{planDate}</if>
+            <if test="planTime != null "> and plan_time = #{planTime}</if>
+            <if test="displayOrder != null  and displayOrder != ''"> and display_order = #{displayOrder}</if>
+            <if test="priority != null  and priority != ''"> and priority = #{priority}</if>
+            <if test="alert != null  and alert != ''"> and alert = #{alert}</if>
+            <if test="alertDate != null "> and alert_date = #{alertDate}</if>
+            <if test="createUser != null "> and create_user = #{createUser}</if>
+            <if test="updateUser != null "> and update_user = #{updateUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectHomeworkById" parameterType="Long" resultMap="HomeworkResult">
+        <include refid="selectHomeworkVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHomework" parameterType="Homework" useGeneratedKeys="true" keyProperty="id">
+        insert into t_homework
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="worker != null">worker,</if>
+            <if test="auditor != null">auditor,</if>
+            <if test="className != null">class_name,</if>
+            <if test="type != null">type,</if>
+            <if test="freq != null">freq,</if>
+            <if test="freqStr != null">freq_str,</if>
+            <if test="planDate != null">plan_date,</if>
+            <if test="planTime != null">plan_time,</if>
+            <if test="displayOrder != null">display_order,</if>
+            <if test="priority != null">priority,</if>
+            <if test="alert != null">alert,</if>
+            <if test="alertDate != null">alert_date,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateUser != null">update_user,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="worker != null">#{worker},</if>
+            <if test="auditor != null">#{auditor},</if>
+            <if test="className != null">#{className},</if>
+            <if test="type != null">#{type},</if>
+            <if test="freq != null">#{freq},</if>
+            <if test="freqStr != null">#{freqStr},</if>
+            <if test="planDate != null">#{planDate},</if>
+            <if test="planTime != null">#{planTime},</if>
+            <if test="displayOrder != null">#{displayOrder},</if>
+            <if test="priority != null">#{priority},</if>
+            <if test="alert != null">#{alert},</if>
+            <if test="alertDate != null">#{alertDate},</if>
+            <if test="createUser != null">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateUser != null">#{updateUser},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHomework" parameterType="Homework">
+        update t_homework
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="worker != null">worker = #{worker},</if>
+            <if test="auditor != null">auditor = #{auditor},</if>
+            <if test="className != null">class_name = #{className},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="freq != null">freq = #{freq},</if>
+            <if test="freqStr != null">freq_str = #{freqStr},</if>
+            <if test="planDate != null">plan_date = #{planDate},</if>
+            <if test="planTime != null">plan_time = #{planTime},</if>
+            <if test="displayOrder != null">display_order = #{displayOrder},</if>
+            <if test="priority != null">priority = #{priority},</if>
+            <if test="alert != null">alert = #{alert},</if>
+            <if test="alertDate != null">alert_date = #{alertDate},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHomeworkById" parameterType="Long">
+        delete from t_homework where id = #{id}
+    </delete>
+
+    <delete id="deleteHomeworkByIds" parameterType="String">
+        delete from t_homework where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.erp.product.mapper.ProductMapper">
+    
+    <resultMap type="Product" id="ProductResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="barcode"    column="barcode"    />
+        <result property="goodsCode"    column="goods_code"    />
+        <result property="enName"    column="en_name"    />
+        <result property="pinyinName"    column="pinyin_name"    />
+        <result property="type"    column="type"    />
+        <result property="category1"    column="category1"    />
+        <result property="category2"    column="category2"    />
+        <result property="price"    column="price"    />
+        <result property="oriPrice"    column="ori_price"    />
+        <result property="costPrice"    column="cost_price"    />
+        <result property="memPrice1"    column="mem_price1"    />
+        <result property="memPrice2"    column="mem_price2"    />
+        <result property="memPrice3"    column="mem_price3"    />
+        <result property="picMain"    column="pic_main"    />
+        <result property="picMainS"    column="pic_main_s"    />
+        <result property="unit"    column="unit"    />
+        <result property="title"    column="title"    />
+        <result property="weight"    column="weight"    />
+        <result property="supplier"    column="supplier"    />
+        <result property="productArea"    column="product_area"    />
+        <result property="tag"    column="tag"    />
+        <result property="description"    column="description"    />
+        <result property="stockQuantity"    column="stock_quantity"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateUser"    column="update_user"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectProductVo">
+        select id, name, barcode, goods_code, en_name, pinyin_name, type, category1, category2, price, ori_price, cost_price, mem_price1, mem_price2, mem_price3, pic_main, pic_main_s, unit, title, weight, supplier, product_area, tag, description, stock_quantity, create_user, create_time, update_user, update_time, remark from t_product
+    </sql>
+
+    <select id="selectProductList" parameterType="Product" resultMap="ProductResult">
+        <include refid="selectProductVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="barcode != null  and barcode != ''"> and barcode = #{barcode}</if>
+            <if test="goodsCode != null  and goodsCode != ''"> and goods_code = #{goodsCode}</if>
+            <if test="enName != null  and enName != ''"> and en_name like concat('%', #{enName}, '%')</if>
+            <if test="pinyinName != null  and pinyinName != ''"> and pinyin_name like concat('%', #{pinyinName}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="category1 != null  and category1 != ''"> and category1 = #{category1}</if>
+            <if test="category2 != null  and category2 != ''"> and category2 = #{category2}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="supplier != null  and supplier != ''"> and supplier = #{supplier}</if>
+            <if test="productArea != null  and productArea != ''"> and product_area = #{productArea}</if>
+            <if test="tag != null  and tag != ''"> and tag = #{tag}</if>
+            <if test="description != null  and description != ''"> and description like concat('%', #{description}, '%')</if>
+            <if test="stockQuantity != null "> and stock_quantity = #{stockQuantity}</if>
+            <if test="createUser != null "> and create_user = #{createUser}</if>
+            <if test="updateUser != null "> and update_user = #{updateUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectProductById" parameterType="Long" resultMap="ProductResult">
+        <include refid="selectProductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+        insert into t_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="barcode != null">barcode,</if>
+            <if test="goodsCode != null">goods_code,</if>
+            <if test="enName != null">en_name,</if>
+            <if test="pinyinName != null">pinyin_name,</if>
+            <if test="type != null">type,</if>
+            <if test="category1 != null">category1,</if>
+            <if test="category2 != null">category2,</if>
+            <if test="price != null">price,</if>
+            <if test="oriPrice != null">ori_price,</if>
+            <if test="costPrice != null">cost_price,</if>
+            <if test="memPrice1 != null">mem_price1,</if>
+            <if test="memPrice2 != null">mem_price2,</if>
+            <if test="memPrice3 != null">mem_price3,</if>
+            <if test="picMain != null">pic_main,</if>
+            <if test="picMainS != null">pic_main_s,</if>
+            <if test="unit != null">unit,</if>
+            <if test="title != null">title,</if>
+            <if test="weight != null">weight,</if>
+            <if test="supplier != null">supplier,</if>
+            <if test="productArea != null">product_area,</if>
+            <if test="tag != null">tag,</if>
+            <if test="description != null">description,</if>
+            <if test="stockQuantity != null">stock_quantity,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateUser != null">update_user,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="barcode != null">#{barcode},</if>
+            <if test="goodsCode != null">#{goodsCode},</if>
+            <if test="enName != null">#{enName},</if>
+            <if test="pinyinName != null">#{pinyinName},</if>
+            <if test="type != null">#{type},</if>
+            <if test="category1 != null">#{category1},</if>
+            <if test="category2 != null">#{category2},</if>
+            <if test="price != null">#{price},</if>
+            <if test="oriPrice != null">#{oriPrice},</if>
+            <if test="costPrice != null">#{costPrice},</if>
+            <if test="memPrice1 != null">#{memPrice1},</if>
+            <if test="memPrice2 != null">#{memPrice2},</if>
+            <if test="memPrice3 != null">#{memPrice3},</if>
+            <if test="picMain != null">#{picMain},</if>
+            <if test="picMainS != null">#{picMainS},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="title != null">#{title},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="supplier != null">#{supplier},</if>
+            <if test="productArea != null">#{productArea},</if>
+            <if test="tag != null">#{tag},</if>
+            <if test="description != null">#{description},</if>
+            <if test="stockQuantity != null">#{stockQuantity},</if>
+            <if test="createUser != null">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateUser != null">#{updateUser},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        update t_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="barcode != null">barcode = #{barcode},</if>
+            <if test="goodsCode != null">goods_code = #{goodsCode},</if>
+            <if test="enName != null">en_name = #{enName},</if>
+            <if test="pinyinName != null">pinyin_name = #{pinyinName},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="category1 != null">category1 = #{category1},</if>
+            <if test="category2 != null">category2 = #{category2},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="oriPrice != null">ori_price = #{oriPrice},</if>
+            <if test="costPrice != null">cost_price = #{costPrice},</if>
+            <if test="memPrice1 != null">mem_price1 = #{memPrice1},</if>
+            <if test="memPrice2 != null">mem_price2 = #{memPrice2},</if>
+            <if test="memPrice3 != null">mem_price3 = #{memPrice3},</if>
+            <if test="picMain != null">pic_main = #{picMain},</if>
+            <if test="picMainS != null">pic_main_s = #{picMainS},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="supplier != null">supplier = #{supplier},</if>
+            <if test="productArea != null">product_area = #{productArea},</if>
+            <if test="tag != null">tag = #{tag},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="stockQuantity != null">stock_quantity = #{stockQuantity},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProductById" parameterType="Long">
+        delete from t_product where id = #{id}
+    </delete>
+
+    <delete id="deleteProductByIds" parameterType="String">
+        delete from t_product where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
