@@ -1,6 +1,9 @@
 package com.ruoyi.project.erp.homework.controller;
 
 import java.util.List;
+
+import com.ruoyi.project.system.dict.domain.DictData;
+import com.ruoyi.project.system.dict.service.IDictDataService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,8 @@ public class HomeworkController extends BaseController
 
     @Autowired
     private IHomeworkService homeworkService;
+    @Autowired
+    private IDictDataService dictDataService;
 
     @RequiresPermissions("erp:homework:view")
     @GetMapping()
@@ -72,9 +77,19 @@ public class HomeworkController extends BaseController
      * 新增作业
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
+        addDicts(  mmap);
         return prefix + "/add";
+    }
+
+    private void addDicts(ModelMap mmap){
+        DictData dictData = new DictData();
+        String key = "homework_class_name";
+        dictData.setDictType(key);
+        List<DictData> list = dictDataService.selectDictDataList(dictData);
+        System.out.println(list);
+        mmap.put("classNameList",list);
     }
 
     /**
@@ -96,6 +111,7 @@ public class HomeworkController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
+        addDicts(  mmap);
         Homework homework = homeworkService.selectHomeworkById(id);
         mmap.put("homework", homework);
         return prefix + "/edit";
