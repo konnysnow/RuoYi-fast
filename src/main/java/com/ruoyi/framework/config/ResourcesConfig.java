@@ -1,5 +1,6 @@
 package com.ruoyi.framework.config;
 
+import com.ruoyi.framework.interceptor.JwtInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,9 @@ public class ResourcesConfig implements WebMvcConfigurer
 
     @Autowired
     private RepeatSubmitInterceptor repeatSubmitInterceptor;
+    //jwt的拦截类
+    @Autowired
+    private JwtInterceptor jwtInterceptor;
 
     /**
      * 默认首页的设置，当输入域名是可以自动跳转到默认指定的网页
@@ -53,5 +57,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     public void addInterceptors(InterceptorRegistry registry)
     {
         registry.addInterceptor(repeatSubmitInterceptor).addPathPatterns("/**");
+        //小程序的请求，需要jwt验证
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/erp/miniapi/**");
     }
 }

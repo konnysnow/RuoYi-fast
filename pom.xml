@@ -38,6 +38,7 @@
         <swagger.version>3.0.0</swagger.version>
         <poi.version>4.1.2</poi.version>
         <oshi.version>6.3.0</oshi.version>
+        <jwt.version>4.3.0</jwt.version>
     </properties>
 
     <dependencies>
@@ -266,6 +267,18 @@
             <groupId>ws.schild</groupId>
             <artifactId>jave-nativebin-linux64</artifactId>
             <version>3.1.1</version>
+        </dependency>
+
+        <!--jwt 3.19.1-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <!--redis,jwt used-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
     </dependencies>

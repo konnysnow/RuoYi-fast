@@ -1,8 +1,19 @@
 # 项目相关配置
 ruoyi:
     profile: /Users/konnysnow/oss/ryfast/uploadPath/
+jwt:
+    secret: dfhiaosphgioadsio
+    expiration: 3600000 # 1 hour in milliseconds
 # 数据源配置
 spring:
+    redis:
+        #数据库索引
+        database: ${REDIS_DB:0}
+        host: ${REDIS_HOST:127.0.0.1}
+        port: ${REDIS_PORT:6379}
+        password: yqredis@2021
+        #连接超时时间
+        timeout: 5000
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
