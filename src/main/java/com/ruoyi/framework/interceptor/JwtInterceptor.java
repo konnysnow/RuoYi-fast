@@ -20,6 +20,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Value("${jwt.expiration}")
     private Long expiration;
 
+    @Value("${jwt.token_prefix}")
+    private String tokenPrefix;//Bearer
+
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
@@ -27,22 +30,26 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进来了。。。");
         String token = request.getHeader("Authorization");
-        if (token == null || !token.startsWith("Bearer ")) {
+        System.out.println("进来了。。。token==\n"+token);
+        if (token == null || !token.startsWith(tokenPrefix+" ")) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             System.out.println("进来了eee1111。。。");
             return false;
         }
-        token = token.substring(7);
-        String subject = JWT.decode(token).getSubject();
+        String tokenNoPrefix = token.substring(7);
+        System.out.println("进来了。。。token.substring(7)==\n"+tokenNoPrefix);
+        String subject = JWT.decode(tokenNoPrefix).getSubject();
+        System.out.println("进来了。。。subject="+subject);
         String cachedToken = redisTemplate.opsForValue().get(subject);
+        System.out.println("进来了。。。cachedToken="+cachedToken);
         if (!token.equals(cachedToken)) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             System.out.println("进来了eee222。。。");
             return false;
         }
         Algorithm algorithm = Algorithm.HMAC256(secret);
-        JWT.require(algorithm).build().verify(token);
-        System.out.println("进来了222。。。");
+        JWT.require(algorithm).build().verify(tokenNoPrefix);
+        System.out.println("进来了ok,,,222。。。");
         return true;
     }
 }

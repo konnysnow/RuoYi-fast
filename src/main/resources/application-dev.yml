@@ -3,6 +3,7 @@ ruoyi:
     profile: /Users/konnysnow/oss/ryfast/uploadPath/
 jwt:
     secret: dfhiaosphgioadsio
+    token_prefix: Bearer
     expiration: 3600000 # 1 hour in milliseconds
 # 数据源配置
 spring:
