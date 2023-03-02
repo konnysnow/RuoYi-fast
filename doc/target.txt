@@ -2,8 +2,10 @@
 1.jwt后台controller登陆增加jwt------ok
 2，拦截器校验jwt------ok
 2。apipost测试------ok
-3。小程序按钮请求url，发请求携带token
-4，小程序存成token，
+3。小程序按钮请求url，发请求携带token------ok
+4，小程序存成token，------ok
 
 2023-03-03
-1。小程序验证码难搞啊
+1。后台，CaptchaValidateFilter，如何动态设置不需要验证码
+2。小程序先获取验证码图片----做这个，1就可以不做
+3。小程序token存到那个store里，存取
