@@ -3,6 +3,7 @@ package com.ruoyi.project.system.user.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.JWT;
 import com.ruoyi.project.erp.utils.JwtUtils;
 import org.apache.shiro.SecurityUtils;
@@ -84,7 +85,9 @@ public class LoginController extends BaseController
 //            if (!token.equals(cachedToken)) {
 //
 //            }
-            return success(jwtToken);
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("token",jwtToken);
+            return success(jsonObject);
         }
         catch (AuthenticationException e)
         {
