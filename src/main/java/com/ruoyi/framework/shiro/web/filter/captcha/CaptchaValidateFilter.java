@@ -39,6 +39,15 @@ public class CaptchaValidateFilter extends AccessControlFilter
     @Override
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception
     {
+//        if(request.getAttribute("gwsCap")!=null) {
+//            try {
+//                System.out.println(request.getAttribute("gwsCap"));
+//                captchaEnabled = (Boolean) request.getAttribute("gwsCap");
+//            }catch (Exception ex){
+//                ex.printStackTrace();
+//            }
+//        }
+        System.out.println("~~~~~~~~~~ShiroUtils.getSession(111)===="+ShiroUtils.getSession().getId());
         request.setAttribute(ShiroConstants.CURRENT_ENABLED, captchaEnabled);
         request.setAttribute(ShiroConstants.CURRENT_TYPE, captchaType);
         return super.onPreHandle(request, response, mappedValue);
@@ -59,6 +68,7 @@ public class CaptchaValidateFilter extends AccessControlFilter
 
     public boolean validateResponse(HttpServletRequest request, String validateCode)
     {
+        System.out.println("~~~~~~~~~~ShiroUtils.getSession(222)===="+ShiroUtils.getSession().getId());
         Object obj = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         String code = String.valueOf(obj != null ? obj : "");
         // 验证码清除，防止多次使用。
