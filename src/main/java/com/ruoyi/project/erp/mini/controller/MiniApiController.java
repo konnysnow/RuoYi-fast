@@ -1,5 +1,6 @@
 package com.ruoyi.project.erp.mini.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.erp.homework.domain.Homework;
@@ -45,5 +46,20 @@ public class MiniApiController extends BaseController
     public String list2(Homework homework)
     {
         return "getDataTable(list)";
+    }
+    /*轮播图接口*/
+    @PostMapping("/swiperList")
+    @ResponseBody
+    public JSONArray genSwiperImageList(Homework homework)
+    {
+        System.out.println("1111\n\n");
+        JSONArray arr=new JSONArray();
+        for(int i=1;i<=5;i++){
+            String str="http://qiniu.konny.space/erp/tutu.konny.space/banner"+i+".jpg";
+            arr.add(str);
+            System.out.println(str+"\n\n");
+        }
+        System.out.println("22222\n\n");
+        return arr;
     }
 }
