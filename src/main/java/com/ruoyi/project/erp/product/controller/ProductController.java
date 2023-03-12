@@ -72,9 +72,11 @@ public class ProductController extends BaseController
      * 新增产品
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
-        return prefix + "/add";
+        Product product = new Product();
+        mmap.put("product", product);
+        return prefix + "/edit";
     }
 
     /**

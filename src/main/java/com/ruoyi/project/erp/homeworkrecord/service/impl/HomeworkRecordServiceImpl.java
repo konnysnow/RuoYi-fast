@@ -67,7 +67,11 @@ public class HomeworkRecordServiceImpl implements IHomeworkRecordService
     @Override
     public int updateHomeworkRecord(HomeworkRecord homeworkRecord)
     {
+        if(homeworkRecord.getCreateTime()==null)
+            homeworkRecord.setCreateTime(DateUtils.getNowDate());
         homeworkRecord.setUpdateTime(DateUtils.getNowDate());
+        if(homeworkRecord.getId()==null)
+            return homeworkRecordMapper.insertHomeworkRecord(homeworkRecord);
         return homeworkRecordMapper.updateHomeworkRecord(homeworkRecord);
     }
 

@@ -38,15 +38,15 @@ public class Order extends BaseEntity
 
     /** 数量 */
     @Excel(name = "数量")
-    private Long quantity;
+    private Double quantity;
 
     /** 金额 */
     @Excel(name = "金额")
-    private Long money;
+    private Double money;
 
     /** 优惠金额 */
     @Excel(name = "优惠金额")
-    private Long discountsMoney;
+    private Double discountsMoney;
 
     /** 下单时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -73,7 +73,7 @@ public class Order extends BaseEntity
 
     /** 付款金额 */
     @Excel(name = "付款金额")
-    private Long payMoney;
+    private Double payMoney;
 
     /** 付款时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -183,30 +183,30 @@ public class Order extends BaseEntity
     {
         return type;
     }
-    public void setQuantity(Long quantity)
+    public void setQuantity(Double quantity)
     {
         this.quantity = quantity;
     }
 
-    public Long getQuantity()
+    public Double getQuantity()
     {
         return quantity;
     }
-    public void setMoney(Long money)
+    public void setMoney(Double money)
     {
         this.money = money;
     }
 
-    public Long getMoney()
+    public Double getMoney()
     {
         return money;
     }
-    public void setDiscountsMoney(Long discountsMoney)
+    public void setDiscountsMoney(Double discountsMoney)
     {
         this.discountsMoney = discountsMoney;
     }
 
-    public Long getDiscountsMoney()
+    public Double getDiscountsMoney()
     {
         return discountsMoney;
     }
@@ -255,12 +255,12 @@ public class Order extends BaseEntity
     {
         return payStatus;
     }
-    public void setPayMoney(Long payMoney)
+    public void setPayMoney(Double payMoney)
     {
         this.payMoney = payMoney;
     }
 
-    public Long getPayMoney()
+    public Double getPayMoney()
     {
         return payMoney;
     }

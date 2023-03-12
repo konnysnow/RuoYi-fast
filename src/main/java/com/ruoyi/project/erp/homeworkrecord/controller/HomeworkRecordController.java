@@ -72,9 +72,11 @@ public class HomeworkRecordController extends BaseController
      * 新增作业计时
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
-        return prefix + "/add";
+        HomeworkRecord homeworkRecord = new HomeworkRecord();
+        mmap.put("homeworkRecord", homeworkRecord);
+        return prefix + "/edit";
     }
 
     /**

@@ -67,7 +67,11 @@ public class ProductServiceImpl implements IProductService
     @Override
     public int updateProduct(Product product)
     {
+        if(product.getCreateTime()==null)
+            product.setCreateTime(DateUtils.getNowDate());
         product.setUpdateTime(DateUtils.getNowDate());
+        if(product.getId()==null)
+            return productMapper.insertProduct(product);
         return productMapper.updateProduct(product);
     }
 

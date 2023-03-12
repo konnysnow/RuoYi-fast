@@ -52,27 +52,27 @@ public class Product extends BaseEntity
 
     /** 售价 */
     @Excel(name = "售价")
-    private Long price;
+    private Double price;
 
     /** 原价 */
     @Excel(name = "原价")
-    private Long oriPrice;
+    private Double oriPrice;
 
     /** 成本价 */
     @Excel(name = "成本价")
-    private Long costPrice;
+    private Double costPrice;
 
     /** 白银会员价 */
     @Excel(name = "白银会员价")
-    private Long memPrice1;
+    private Double memPrice1;
 
     /** 黄金会员价 */
     @Excel(name = "黄金会员价")
-    private Long memPrice2;
+    private Double memPrice2;
 
     /** 钻石会员价 */
     @Excel(name = "钻石会员价")
-    private Long memPrice3;
+    private Double memPrice3;
 
     /** 主图 */
     @Excel(name = "主图")
@@ -203,57 +203,57 @@ public class Product extends BaseEntity
     {
         return category2;
     }
-    public void setPrice(Long price)
+    public void setPrice(Double price)
     {
         this.price = price;
     }
 
-    public Long getPrice()
+    public Double getPrice()
     {
         return price;
     }
-    public void setOriPrice(Long oriPrice)
+    public void setOriPrice(Double oriPrice)
     {
         this.oriPrice = oriPrice;
     }
 
-    public Long getOriPrice()
+    public Double getOriPrice()
     {
         return oriPrice;
     }
-    public void setCostPrice(Long costPrice)
+    public void setCostPrice(Double costPrice)
     {
         this.costPrice = costPrice;
     }
 
-    public Long getCostPrice()
+    public Double getCostPrice()
     {
         return costPrice;
     }
-    public void setMemPrice1(Long memPrice1)
+    public void setMemPrice1(Double memPrice1)
     {
         this.memPrice1 = memPrice1;
     }
 
-    public Long getMemPrice1()
+    public Double getMemPrice1()
     {
         return memPrice1;
     }
-    public void setMemPrice2(Long memPrice2)
+    public void setMemPrice2(Double memPrice2)
     {
         this.memPrice2 = memPrice2;
     }
 
-    public Long getMemPrice2()
+    public Double getMemPrice2()
     {
         return memPrice2;
     }
-    public void setMemPrice3(Long memPrice3)
+    public void setMemPrice3(Double memPrice3)
     {
         this.memPrice3 = memPrice3;
     }
 
-    public Long getMemPrice3()
+    public Double getMemPrice3()
     {
         return memPrice3;
     }

@@ -67,7 +67,11 @@ public class OrderServiceImpl implements IOrderService
     @Override
     public int updateOrder(Order order)
     {
+        if(order.getCreateTime()==null)
+            order.setCreateTime(DateUtils.getNowDate());
         order.setUpdateTime(DateUtils.getNowDate());
+        if(order.getId()==null)
+            return orderMapper.insertOrder(order);
         return orderMapper.updateOrder(order);
     }
 

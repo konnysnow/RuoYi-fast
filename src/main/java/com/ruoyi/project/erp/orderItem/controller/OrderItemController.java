@@ -72,9 +72,11 @@ public class OrderItemController extends BaseController
      * 新增订单明细
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
-        return prefix + "/add";
+        OrderItem orderItem = new OrderItem();
+        mmap.put("orderItem", orderItem);
+        return prefix + "/edit";
     }
 
     /**

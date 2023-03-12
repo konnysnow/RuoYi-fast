@@ -32,19 +32,19 @@ public class OrderItem extends BaseEntity
 
     /** 单价 */
     @Excel(name = "单价")
-    private Long price;
+    private Double price;
 
     /** 数量 */
     @Excel(name = "数量")
-    private Long quantity;
+    private Double quantity;
 
     /** 成本价 */
     @Excel(name = "成本价")
-    private Long costPrice;
+    private Double costPrice;
 
     /** 金额 */
     @Excel(name = "金额")
-    private Long money;
+    private Double money;
 
     /** 编号 */
     @Excel(name = "编号")
@@ -94,39 +94,39 @@ public class OrderItem extends BaseEntity
     {
         return productName;
     }
-    public void setPrice(Long price)
+    public void setPrice(Double price)
     {
         this.price = price;
     }
 
-    public Long getPrice()
+    public Double getPrice()
     {
         return price;
     }
-    public void setQuantity(Long quantity)
+    public void setQuantity(Double quantity)
     {
         this.quantity = quantity;
     }
 
-    public Long getQuantity()
+    public Double getQuantity()
     {
         return quantity;
     }
-    public void setCostPrice(Long costPrice)
+    public void setCostPrice(Double costPrice)
     {
         this.costPrice = costPrice;
     }
 
-    public Long getCostPrice()
+    public Double getCostPrice()
     {
         return costPrice;
     }
-    public void setMoney(Long money)
+    public void setMoney(Double money)
     {
         this.money = money;
     }
 
-    public Long getMoney()
+    public Double getMoney()
     {
         return money;
     }

@@ -72,9 +72,11 @@ public class CustomerController extends BaseController
      * 新增客户
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
-        return prefix + "/add";
+        Customer customer=new Customer();
+        mmap.put("customer", customer);
+        return prefix + "/edit";
     }
 
     /**

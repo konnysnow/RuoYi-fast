@@ -67,7 +67,11 @@ public class OrderItemServiceImpl implements IOrderItemService
     @Override
     public int updateOrderItem(OrderItem orderItem)
     {
+        if(orderItem.getCreateTime()==null)
+            orderItem.setCreateTime(DateUtils.getNowDate());
         orderItem.setUpdateTime(DateUtils.getNowDate());
+        if(orderItem.getId()==null)
+            return orderItemMapper.insertOrderItem(orderItem);
         return orderItemMapper.updateOrderItem(orderItem);
     }
 

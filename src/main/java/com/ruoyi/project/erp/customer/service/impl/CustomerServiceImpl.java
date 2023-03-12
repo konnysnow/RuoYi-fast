@@ -67,7 +67,11 @@ public class CustomerServiceImpl implements ICustomerService
     @Override
     public int updateCustomer(Customer customer)
     {
+        if(customer.getCreateTime()==null)
+            customer.setCreateTime(DateUtils.getNowDate());
         customer.setUpdateTime(DateUtils.getNowDate());
+        if(customer.getId()==null)
+            return customerMapper.insertCustomer(customer);
         return customerMapper.updateCustomer(customer);
     }
 
