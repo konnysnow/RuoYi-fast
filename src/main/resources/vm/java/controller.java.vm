@@ -92,9 +92,11 @@ public class ${ClassName}Controller extends BaseController
      * 新增${functionName}
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
-        return prefix + "/add";
+        ${ClassName} ${className} = new ${ClassName}();
+        mmap.put("${className}", ${className});
+        return prefix + "/edit";
     }
 #elseif($table.tree)
     /**

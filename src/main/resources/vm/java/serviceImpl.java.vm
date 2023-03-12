@@ -102,7 +102,19 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #if($column.javaField == 'updateTime')
         ${className}.setUpdateTime(DateUtils.getNowDate());
 #end
+#if($column.javaField == 'createTime')
+        if(${className}.getCreateTime()==null)
+            ${className}.setCreateTime(DateUtils.getNowDate());
 #end
+#end
+        if(${className}.getId()==null){
+            int cnt = ${className}Mapper.insert${ClassName}(${className});
+#if($table.sub)
+            ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}());
+            insert${subClassName}(${className});
+#end
+            return cnt;
+        }
 #if($table.sub)
         ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}());
         insert${subClassName}(${className});
