@@ -80,7 +80,9 @@ public class HomeworkController extends BaseController
     public String add(ModelMap mmap)
     {
         addDicts(  mmap);
-        return prefix + "/add";
+        Homework homework = new Homework();
+        mmap.put("homework", homework);
+        return prefix + "/edit";
     }
 
     private void addDicts(ModelMap mmap){

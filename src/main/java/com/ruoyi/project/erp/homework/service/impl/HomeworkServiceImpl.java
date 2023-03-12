@@ -59,7 +59,7 @@ public class HomeworkServiceImpl implements IHomeworkService
     }
 
     /**
-     * 修改作业
+     * 修改作业(/新增)
      * 
      * @param homework 作业
      * @return 结果
@@ -67,7 +67,11 @@ public class HomeworkServiceImpl implements IHomeworkService
     @Override
     public int updateHomework(Homework homework)
     {
+        if(homework.getCreateTime()==null)
+            homework.setCreateTime(DateUtils.getNowDate());
         homework.setUpdateTime(DateUtils.getNowDate());
+        if(homework.getId()==null)
+            return homeworkMapper.insertHomework(homework);
         return homeworkMapper.updateHomework(homework);
     }
 
