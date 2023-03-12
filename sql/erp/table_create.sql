@@ -58,9 +58,9 @@ create table ry_fast.t_product
   冷冻冷藏---5
   酒水乳饮---6
   line2：
-  休闲食品
-  个护清洁
-  日常百货
+  休闲食品---7
+  个护清洁---8
+  日常百货---9
  */
 
 create table ry_fast.t_customer
@@ -161,13 +161,13 @@ create table ry_fast.t_homework
     name        varchar(255) default '' null comment '作业名',
     worker        varchar(255) default '' null comment '负责人',
     auditor        varchar(255) default '' null comment '审核人',
-    class_name        varchar(255) default '' null comment '课程',/*语文，数学，英语，围棋，陶笛，阅读，体育*/
+    class_name        varchar(255) default '' null comment '课程',/*语文，数学，英语，围棋，陶笛，阅读，体育，写作，计算机，其他*/
     type        varchar(255) default '' null comment '类型',/*作业，日程*/
     freq        varchar(255) default '' null comment '周期',/*每天，工作日，每周，周末，每月，每年，一次性，不定时*/
 
     freq_str varchar(255) default '' null comment '周期时间',
     plan_date datetime                null comment '计划时间',
-    plan_time        int default 0 null comment '计划用时',/*单位，秒*/
+    plan_time        int default 0 null comment '计划用时',/*单位，分钟*/
     display_order        varchar(255) default '' null comment '顺序',
     priority        varchar(255) default '' null comment '优先级',
     alert        varchar(255) default '' null comment '提醒',

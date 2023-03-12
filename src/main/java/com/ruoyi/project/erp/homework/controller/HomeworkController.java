@@ -2,6 +2,7 @@ package com.ruoyi.project.erp.homework.controller;
 
 import java.util.List;
 
+import com.ruoyi.project.erp.ErpBaseController;
 import com.ruoyi.project.system.dict.domain.DictData;
 import com.ruoyi.project.system.dict.service.IDictDataService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -30,14 +31,12 @@ import com.ruoyi.framework.web.page.TableDataInfo;
  */
 @Controller
 @RequestMapping("/erp/homework")
-public class HomeworkController extends BaseController
+public class HomeworkController extends ErpBaseController
 {
     private String prefix = "erp/homework";
 
     @Autowired
     private IHomeworkService homeworkService;
-    @Autowired
-    private IDictDataService dictDataService;
 
     @RequiresPermissions("erp:homework:view")
     @GetMapping()
@@ -79,19 +78,21 @@ public class HomeworkController extends BaseController
     @GetMapping("/add")
     public String add(ModelMap mmap)
     {
-        addDicts(  mmap);
+        addDicts(mmap);
         Homework homework = new Homework();
         mmap.put("homework", homework);
         return prefix + "/edit";
     }
-
+    /**增加字典值**/
     private void addDicts(ModelMap mmap){
-        DictData dictData = new DictData();
-        String key = "homework_class_name";
-        dictData.setDictType(key);
-        List<DictData> list = dictDataService.selectDictDataList(dictData);
-        System.out.println(list);
-        mmap.put("classNameList",list);
+        String[] dictArr = new String[]{
+                "homework_class_name","classNameList"
+                ,"homework_type","typeList"
+                ,"homework_freq","freqList"
+                ,"homework_priority","priorityList"
+                ,"yes_or_no","yesnoList"
+        };
+        addDicts(dictArr,mmap);
     }
 
     /**
@@ -113,7 +114,7 @@ public class HomeworkController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        addDicts(  mmap);
+        addDicts(mmap);
         Homework homework = homeworkService.selectHomeworkById(id);
         mmap.put("homework", homework);
         return prefix + "/edit";

@@ -1,6 +1,8 @@
 package com.ruoyi.project.erp.customer.controller;
 
 import java.util.List;
+
+import com.ruoyi.project.erp.ErpBaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
  */
 @Controller
 @RequestMapping("/erp/customer")
-public class CustomerController extends BaseController
+public class CustomerController extends ErpBaseController
 {
     private String prefix = "erp/customer";
 
@@ -74,9 +76,18 @@ public class CustomerController extends BaseController
     @GetMapping("/add")
     public String add(ModelMap mmap)
     {
+        addDicts(mmap);
         Customer customer=new Customer();
         mmap.put("customer", customer);
         return prefix + "/edit";
+    }
+    /**增加字典值**/
+    private void addDicts(ModelMap mmap){
+        String[] dictArr = new String[]{
+                "customer_type","typeList"
+                ,"yes_or_no","yesnoList"
+        };
+        addDicts(dictArr,mmap);
     }
 
     /**
@@ -98,6 +109,7 @@ public class CustomerController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
+        addDicts(mmap);
         Customer customer = customerService.selectCustomerById(id);
         mmap.put("customer", customer);
         return prefix + "/edit";

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改作业')" />
+    <th:block th:include="include :: header('修改作业/新增')" />
     <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
@@ -17,31 +17,37 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">负责人：</label>
                 <div class="col-sm-8">
-                    <input name="worker" th:field="*{worker}" class="form-control" type="text">
+                    <input name="worker" th:field="*{worker}" class="form-control" type="text">下拉
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">审核人：</label>
                 <div class="col-sm-8">
-                    <input name="auditor" th:field="*{auditor}" class="form-control" type="text">
+                    <input name="auditor" th:field="*{auditor}" class="form-control" type="text">下拉
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">课程：</label>
                 <div class="col-sm-8">
-                    <input name="className" th:field="*{className}" class="form-control" type="text">
+                    <select th:field="*{className}">
+                        <option th:each="option : ${classNameList}" th:value="${option.dictValue}" th:text="${option.dictValue}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">类型：</label>
                 <div class="col-sm-8">
-                    <input name="type" th:field="*{type}" class="form-control" type="text">
+                    <select th:field="*{type}">
+                        <option th:each="option : ${typeList}" th:value="${option.dictValue}" th:text="${option.dictValue}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">周期：</label>
                 <div class="col-sm-8">
-                    <input name="freq" th:field="*{freq}" class="form-control" type="text">
+                    <select th:field="*{freq}">
+                        <option th:each="option : ${freqList}" th:value="${option.dictValue}" th:text="${option.dictValue}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
@@ -62,7 +68,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">计划用时：</label>
                 <div class="col-sm-8">
-                    <input name="planTime" th:field="*{planTime}" class="form-control" type="text">
+                    <input name="planTime" th:field="*{planTime}" class="form-control" type="text">分钟
                 </div>
             </div>
             <div class="form-group">    
@@ -74,13 +80,17 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">优先级：</label>
                 <div class="col-sm-8">
-                    <input name="priority" th:field="*{priority}" class="form-control" type="text">
+                    <select th:field="*{priority}">
+                        <option th:each="option : ${priorityList}" th:value="${option.dictValue}" th:text="${option.dictValue}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">提醒：</label>
                 <div class="col-sm-8">
-                    <input name="alert" th:field="*{alert}" class="form-control" type="text">
+                    <select th:field="*{alert}">
+                        <option th:each="option : ${yesnoList}" th:value="${option.dictValue}" th:text="${option.dictValue}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    

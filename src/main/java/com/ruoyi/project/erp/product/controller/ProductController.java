@@ -1,6 +1,8 @@
 package com.ruoyi.project.erp.product.controller;
 
 import java.util.List;
+
+import com.ruoyi.project.erp.ErpBaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
  */
 @Controller
 @RequestMapping("/erp/product")
-public class ProductController extends BaseController
+public class ProductController extends ErpBaseController
 {
     private String prefix = "erp/product";
 
@@ -74,9 +76,19 @@ public class ProductController extends BaseController
     @GetMapping("/add")
     public String add(ModelMap mmap)
     {
+        addDicts(mmap);
         Product product = new Product();
         mmap.put("product", product);
         return prefix + "/edit";
+    }
+    /**增加字典值**/
+    private void addDicts(ModelMap mmap){
+        String[] dictArr = new String[]{
+                "product_category1","category1List"
+                ,"product_unit","unitList"
+                ,"yes_or_no","yesnoList"
+        };
+        addDicts(dictArr,mmap);
     }
 
     /**
@@ -98,6 +110,7 @@ public class ProductController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
+        addDicts(mmap);
         Product product = productService.selectProductById(id);
         mmap.put("product", product);
         return prefix + "/edit";
