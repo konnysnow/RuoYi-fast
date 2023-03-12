@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.erp.note.mapper.NoteMapper">
+    
+    <resultMap type="Note" id="NoteResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="context"    column="context"    />
+        <result property="author"    column="author"    />
+        <result property="type"    column="type"    />
+        <result property="url"    column="url"    />
+        <result property="recordTime"    column="record_time"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateUser"    column="update_user"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectNoteVo">
+        select id, title, context, author, type, url, record_time, create_user, create_time, update_user, update_time, remark from t_note
+    </sql>
+
+    <select id="selectNoteList" parameterType="Note" resultMap="NoteResult">
+        <include refid="selectNoteVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="context != null  and context != ''"> and context = #{context}</if>
+            <if test="author != null  and author != ''"> and author = #{author}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="recordTime != null "> and record_time = #{recordTime}</if>
+            <if test="createUser != null "> and create_user = #{createUser}</if>
+            <if test="updateUser != null "> and update_user = #{updateUser}</if>
+        </where>
+    </select>
+    
+    <select id="selectNoteById" parameterType="Long" resultMap="NoteResult">
+        <include refid="selectNoteVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertNote" parameterType="Note" useGeneratedKeys="true" keyProperty="id">
+        insert into t_note
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="context != null">context,</if>
+            <if test="author != null">author,</if>
+            <if test="type != null">type,</if>
+            <if test="url != null">url,</if>
+            <if test="recordTime != null">record_time,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateUser != null">update_user,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="context != null">#{context},</if>
+            <if test="author != null">#{author},</if>
+            <if test="type != null">#{type},</if>
+            <if test="url != null">#{url},</if>
+            <if test="recordTime != null">#{recordTime},</if>
+            <if test="createUser != null">#{createUser},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateUser != null">#{updateUser},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNote" parameterType="Note">
+        update t_note
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="context != null">context = #{context},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="recordTime != null">record_time = #{recordTime},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNoteById" parameterType="Long">
+        delete from t_note where id = #{id}
+    </delete>
+
+    <delete id="deleteNoteByIds" parameterType="String">
+        delete from t_note where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

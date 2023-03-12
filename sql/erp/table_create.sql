@@ -201,3 +201,23 @@ create table ry_fast.t_homework_record
     comment '作业计时表';
 /*-----------------------2023-02-19，end----------------------------*/
 
+
+/*-----------------------2023-03-12，end----------------------------*/
+create table ry_fast.t_note
+(
+    id          bigint auto_increment comment '笔记id'
+        primary key,
+    title        varchar(255) default '' null comment '标题',
+    context        varchar(255) default '' null comment '内容',
+    author        varchar(255) default '' null comment '作者',
+    type        varchar(255) default '' null comment '类型',/*常用口语，励志，教育，感悟，诗句，随笔*/
+    url        varchar(255) default '' null comment '网址',
+    record_time datetime                null comment '操作时间',
+    create_user bigint                  null comment '创建人',
+    create_time datetime                null comment '创建时间',
+    update_user bigint                  null comment '更新人',
+    update_time datetime                null comment '更新时间',
+    remark      varchar(500)            null comment '描述'
+)
+    comment '笔记表';
+/*-----------------------2023-03-12，end----------------------------*/
