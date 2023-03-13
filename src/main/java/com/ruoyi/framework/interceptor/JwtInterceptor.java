@@ -11,6 +11,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * LoginController--生成token，用户密码登录
+ * WxController--生成token，微信认证后
+ * JwtInterceptor--校验token
+ * ResourcesConfig--配置需要拦截的url
+ * ShiroConfig--配置放行的url
+ */
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
 

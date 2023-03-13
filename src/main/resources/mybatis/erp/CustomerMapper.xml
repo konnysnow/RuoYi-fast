@@ -63,6 +63,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCustomerVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectCustomerByOpenId" parameterType="String" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        where mini_openid = #{id}
+    </select>
+
+    <select id="selectCustomerByUnionId" parameterType="String" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        where mini_unionid = #{id}
+    </select>
         
     <insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
         insert into t_customer

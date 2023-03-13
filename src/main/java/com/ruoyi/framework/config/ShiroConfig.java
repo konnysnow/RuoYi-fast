@@ -289,6 +289,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
         filterChainDefinitionMap.put("/erp/miniapi/**", "anon");//测试小程序接口
+        filterChainDefinitionMap.put("/wx/auth/**", "anon");//微信接口，放行
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问

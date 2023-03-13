@@ -18,6 +18,8 @@ public interface CustomerMapper
      * @return 客户
      */
     public Customer selectCustomerById(Long id);
+    public Customer selectCustomerByOpenId(String id);
+    public Customer selectCustomerByUnionId(String id);
 
     /**
      * 查询客户列表

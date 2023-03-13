@@ -18,6 +18,11 @@ public interface ICustomerService
      * @return 客户
      */
     public Customer selectCustomerById(Long id);
+    public Customer selectCustomerByOpenId(String id);
+    public Customer selectCustomerByUnionId(String id);
+
+    /**校验微信客户，如果不存在就创建*/
+    public Customer checkWeixinCustomer(String openId);
 
     /**
      * 查询客户列表

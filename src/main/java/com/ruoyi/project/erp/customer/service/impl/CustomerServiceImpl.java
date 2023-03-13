@@ -2,6 +2,7 @@ package com.ruoyi.project.erp.customer.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.erp.customer.mapper.CustomerMapper;
@@ -31,6 +32,30 @@ public class CustomerServiceImpl implements ICustomerService
     public Customer selectCustomerById(Long id)
     {
         return customerMapper.selectCustomerById(id);
+    }
+    @Override
+    public Customer selectCustomerByOpenId(String id)
+    {
+        return customerMapper.selectCustomerByOpenId(id);
+    }
+    @Override
+    public Customer selectCustomerByUnionId(String id)
+    {
+        return customerMapper.selectCustomerByUnionId(id);
+    }
+
+    /**校验微信客户，如果不存在就创建*/
+    public Customer checkWeixinCustomer(String openId){
+        if(StringUtils.isNotEmpty(openId)){
+            Customer customer = this.selectCustomerByOpenId(openId);
+            if(customer==null){
+                customer=new Customer();
+                customer.setMiniOpenid(openId);
+                this.updateCustomer(customer);
+                return customer;
+            }
+        }
+        return null ;
     }
 
     /**

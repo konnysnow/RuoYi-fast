@@ -57,7 +57,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     public void addInterceptors(InterceptorRegistry registry)
     {
         registry.addInterceptor(repeatSubmitInterceptor).addPathPatterns("/**");
-        //小程序的请求，需要jwt验证
+        //FIXME 小程序的请求，需要jwt验证
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/erp/miniapi/**");
     }
 }
