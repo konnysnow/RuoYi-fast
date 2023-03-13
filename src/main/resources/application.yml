@@ -151,3 +151,9 @@ gen:
   autoRemovePre: true
   # 表前缀（生成类名不会包含表前缀，多个用逗号分隔）
   tablePrefix: t_
+
+wx:
+  miniapp:
+    appid: wx3ec3c0c2169576a0
+    secret: 053c23d9cea9553f14b85e40c8ce9a4a
+    msgDataFormat: JSON #数据可以，默认json就ok
