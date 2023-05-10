@@ -40,9 +40,9 @@ public class WxController extends BaseController {
     private String tokenPrefix;//Bearer
 
     @ApiOperation("微信登陆")
-    @PostMapping(value = "/getWxInfo", produces = "application/json")
+    @PostMapping(value = "/wxc2s", produces = "application/json")
     @SneakyThrows(WxErrorException.class)
-    public JSONObject getWxInfo(@RequestBody JSONObject paramJson){
+    public JSONObject wxc2s(@RequestBody JSONObject paramJson){
         String code = paramJson.getString("code");
         String nickname = paramJson.getString("nickname");
         String picurl = paramJson.getString("picurl");

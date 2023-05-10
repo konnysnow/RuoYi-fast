@@ -5,9 +5,12 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.erp.homework.domain.Homework;
 import com.ruoyi.project.erp.homework.service.IHomeworkService;
+import com.ruoyi.project.system.dict.domain.DictData;
+import com.ruoyi.project.system.dict.service.IDictDataService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +29,8 @@ public class MiniApiController extends BaseController
 
     @Autowired
     private IHomeworkService homeworkService;
+    @Autowired
+    private IDictDataService dictDataService;
     /**
      * 查询作业列表
      */
@@ -44,6 +49,7 @@ public class MiniApiController extends BaseController
     {
         return "getDataTable(list)";
     }
+
     /*轮播图接口*/
     @PostMapping("/swiperList")
     @ResponseBody
@@ -58,5 +64,20 @@ public class MiniApiController extends BaseController
         }
         System.out.println("22222\n\n");
         return arr;
+    }
+
+
+    /*轮播图接口*/
+    @PostMapping("/menuList")
+    @ResponseBody
+    public List<DictData> menuList()
+    {
+        System.out.println("------1111\n\n");
+        DictData dictData = new DictData();
+        dictData.setDictType("product_category1");
+        List<DictData> list = dictDataService.selectDictDataList(dictData);
+        System.out.println("key=product_category1,list="+list);
+        System.out.println("-----22222\n\n");
+        return list;
     }
 }
