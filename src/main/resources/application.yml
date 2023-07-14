@@ -154,6 +154,6 @@ gen:
 
 wx:
   miniapp:
-    appid: wx3ec3c0c2169576a0
-    secret: 053c23d9cea9553f14b85e40c8ce9a4a
+    appid: yyy
+    secret: xxx
     msgDataFormat: JSON #数据可以，默认json就ok

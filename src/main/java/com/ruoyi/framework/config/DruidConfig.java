@@ -75,6 +75,7 @@ public class DruidConfig
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
